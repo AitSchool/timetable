@@ -1,0 +1,52 @@
+<view class="page-container">
+  <view class="page-left">
+    <view 
+        class="nav-item {{index == activeIndex ? 'active' : ''}}" 
+        wx:for="{{datas}}" 
+        wx:key="{{index}}" 
+        data-index="{{index}}"
+        bindtap="handleCheckout">
+      <view class="nav-item-date">{{item.date}}</view>
+      <view class="nav-item-item-day">{{item.day_display}}</view>
+    </view>
+  </view>
+  <scroll-view 
+    scroll-y 
+    class="page-right" 
+    scroll-into-view="lesson-item-{{activeIndex}}"
+    scroll-with-animation="true">
+    <swiper class="swiper-section">
+      <swiper-item>
+        <image src="/images/header.png" class="slide-image"/>
+      </swiper-item>
+    </swiper>
+
+    <view class="lesson-section">
+      <view 
+        wx:for="{{datas}}" 
+        wx:key="{{index}}" 
+        id="lesson-item-{{index}}"
+        class="lesson-item">
+        <view class="lesson-item-title">
+          {{item.date}}·{{item.day_display}}
+        </view>
+        <view 
+          class="lesson-item-day"
+          wx:for="{{item.lessons}}"
+          wx:key="unique" 
+          wx:for-item="lesson" >
+          <view class="day-item-time">{{lesson.time}}</view>
+          <view class="day-item-content">
+            <view class="day-item-left">
+              <image src="/images/{{lesson.type}}.png" class="day-item-avatar"/>
+            </view>
+            <view class="day-item-right">
+              <view class="day-item-lesson-name">{{lesson.name}}</view>
+              <view class="day-item-lesson-teacher">教练 - {{lesson.teacher}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
